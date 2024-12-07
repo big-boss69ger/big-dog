@@ -3,35 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gaming Website</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Nitro Zone</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Welcome to the Gaming Zone</h1>
-    <nav>
-      <a href="#games">Games</a>
-      <a href="#leaderboard">Leaderboard</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-  <main>
-    <section id="games">
-      <h2>Our Games</h2>
-      <div id="game-container">
-        <button onclick="startGame()">Play Game</button>
-      </div>
-    </section>
-    <section id="leaderboard">
-      <h2>Leaderboard</h2>
-      <ul id="leaderboard-list">
-        <!-- Dynamic content here -->
-      </ul>
-    </section>
-  </main>
-  <footer>
-    <p>&copy; 2024 Gaming Website</p>
-  </footer>
+  <div id="game-container">
+    <canvas id="gameCanvas"></canvas>
+    <div id="score">Score: 0</div>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
