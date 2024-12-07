@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My GitHub Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gaming Website</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to My Website!</h1>
-    <p>This is hosted on GitHub Pages.</p>
+  <header>
+    <h1>Welcome to the Gaming Zone</h1>
+    <nav>
+      <a href="#games">Games</a>
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <section id="games">
+      <h2>Our Games</h2>
+      <div id="game-container">
+        <button onclick="startGame()">Play Game</button>
+      </div>
+    </section>
+    <section id="leaderboard">
+      <h2>Leaderboard</h2>
+      <ul id="leaderboard-list">
+        <!-- Dynamic content here -->
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2024 Gaming Website</p>
+  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
