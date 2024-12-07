@@ -1,0 +1,81 @@
+import pygame
+import random
+
+# Initialize Pygame
+pygame.init()
+
+# Screen dimensions
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Racing Game")
+
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GRAY = (200, 200, 200)
+BLUE = (0, 0, 255)
+
+# Clock and font
+clock = pygame.time.Clock()
+font = pygame.font.Font(None, 50)
+
+# Player car setup
+player_car = pygame.image.load("car.png")  # Replace with your car image or create one
+player_car = pygame.transform.scale(player_car, (50, 100))  # Resize car
+player_x = WIDTH // 2 - 25
+player_y = HEIGHT - 150
+player_speed = 10
+
+# Obstacles setup
+obstacle_width, obstacle_height = 50, 100
+obstacles = [pygame.Rect(random.randint(0, WIDTH - obstacle_width), -200, obstacle_width, obstacle_height) for _ in range(3)]
+obstacle_speed = 7
+
+# Score
+score = 0
+
+# Game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Get key presses
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT] and player_x > 0:
+        player_x -= player_speed
+    if keys[pygame.K_RIGHT] and player_x < WIDTH - 50:
+        player_x += player_speed
+
+    # Move obstacles
+    for obstacle in obstacles:
+        obstacle.y += obstacle_speed
+        if obstacle.y > HEIGHT:
+            obstacle.y = -100
+            obstacle.x = random.randint(0, WIDTH - obstacle_width)
+            score += 1  # Increase score when an obstacle is dodged
+
+    # Collision detection
+    for obstacle in obstacles:
+        if pygame.Rect(player_x, player_y, 50, 100).colliderect(obstacle):
+            running = False  # Game over
+
+    # Drawing
+    screen.fill(GRAY)  # Background color
+    pygame.draw.rect(screen, WHITE, (WIDTH // 2 - 5, 0, 10, HEIGHT))  # Road centerline
+    screen.blit(player_car, (player_x, player_y))  # Draw player car
+    for obstacle in obstacles:
+        pygame.draw.rect(screen, RED, obstacle)  # Draw obstacles
+
+    # Display score
+    score_text = font.render(f"Score: {score}", True, BLACK)
+    screen.blit(score_text, (10, 10))
+
+    # Update display
+    pygame.display.flip()
+    clock.tick(30)  # 30 FPS
+
+# Quit Pygame
+pygame.quit()
